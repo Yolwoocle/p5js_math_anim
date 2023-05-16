@@ -1,0 +1,91 @@
+:root {
+    --white:      #ffffff;
+    --light-gray: #b8b8b8;
+    --dark-gray:  #474747;
+    --red:        #e43b44;
+    --green:      #63c74d;
+}
+
+.material-symbols-outlined {
+    font-variation-settings:
+    'FILL' 0,
+    'wght' 700,
+    'GRAD' 0,
+    'opsz' 48
+}
+
+body {
+    margin: 0;
+    width: 100%;
+    font-family: 'Lexend';
+}
+
+.page {
+    width: 100%;
+
+    max-width: 800px;
+    align-items: center;
+    text-align: center;
+    margin: auto;
+    
+    padding: 20px;
+
+    color: var(--dark-gray);
+    font-size: 20px;
+}
+
+.center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#magnitudeField {
+    display: inline-block;
+    position: relative;
+    width: 50px;
+    text-align: center;
+}
+#magnitudeFieldValue {
+    font-weight: bold;
+    color: var(--red);
+}
+#directionFieldArrow {
+    color: var(--red);
+    position: relative;
+    top: 6px
+}
+
+/* Scroll bar */
+
+
+/* width */
+::-webkit-scrollbar {
+    width: 20px;
+    display: contents;
+}
+  
+/* Track */
+::-webkit-scrollbar-track {
+    background: #f1f1f100;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+    background-color: rgba(0, 0, 0, 0.3);
+    
+    min-width: 100px;
+    border: solid 6px rgba(0, 0, 0, 0);
+    box-sizing: border-box;
+    background-clip: content-box;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+    background-color: rgba(0, 0, 0, 0.4);
+}
+
+::-webkit-scrollbar-thumb:active {
+    background-color: rgba(0, 0, 0, 0.6);
+}

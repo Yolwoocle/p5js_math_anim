@@ -1,0 +1,10 @@
+@font-face {
+    font-family: 'Lexend';
+    src: url(../assets/lexend-regular.ttf);
+}
+
+@font-face {
+    font-family: 'Lexend';
+    font-weight: bold;
+    src: url(../assets/lexend-bold.ttf);
+}
