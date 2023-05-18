@@ -1,27 +1,3 @@
-function generateVectors(maxRadius, number=100, col=COL_LIGHTGRAY) {
-    // Sunflower distribution https://stackoverflow.com/questions/28567166/uniformly-distribute-x-points-inside-a-circle
-    let arr = [];
-    const phi = 1.61803398875;
-    const angle_stride = (2 * Math.PI) / (phi*phi)
-    let radius = (k, n) => {
-        if(k > n) { 
-            return 1.0 
-        } else {
-            return Math.sqrt(k - 0.5) / Math.sqrt(n - 0.5)
-        }
-    }
-    
-    for (let i=0; i<number; i++) {
-        let r = radius(i, number) * maxRadius
-        let theta = i * angle_stride
-        let x = r * Math.cos(theta);
-        let y = r * Math.sin(theta);
-        arr.push(vec2(x, y));
-    };
-
-    return arr
-}
-
 const seedVectorSpaceR2 = (sketch) => {
     
     const size_ = 50;
@@ -32,7 +8,7 @@ const seedVectorSpaceR2 = (sketch) => {
     }
 
     let vectorsRadius = 200
-    const spanVectors = generateVectors(vectorsRadius, 150)
+    let spanVectors
     let normalFont
     let boldFont
     let backupFont
@@ -56,6 +32,7 @@ const seedVectorSpaceR2 = (sketch) => {
         basis.i = vec2(Math.random()+1, (Math.random())  )
         basis.j = vec2(Math.random(),  -(Math.random()+1))
 
+        spanVectors = generateVectorsCircle(vectorsRadius, 100)
         // textDiv = sketch.createDiv('span(<b>î</b>, <b>ĵ</b>)');
     }
 
@@ -90,7 +67,7 @@ const seedVectorSpaceR2 = (sketch) => {
         // drawBasis(sketch, basis, size_ * easeOut(t), boldFont)
         
         // Text: basis vectors
-        let lambda = clamp((sketch.millis() - sketch.epochTime - 4000)/animSpeed, 0, 1)
+        let lambda = clamp((sketch.millis() - sketch.epochTime - 3000)/animSpeed, 0, 1)
         let c1 = sketch.color(0,0,0,0)
         let c2 = sketch.color(COL_DARKGRAY)
         let col = sketch.lerpColor(c1, c2, lambda)

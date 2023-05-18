@@ -7,13 +7,18 @@
     <script src="https://cdn.jsdelivr.net/npm/p5@1.6.0/lib/p5.js"></script> 
     <!-- <script src="./lib/p5.fillGradient.js"></script> -->
     
-    <script src="js/p5js/util.js"></script>
-    <script src="js/p5js/canvas.js"></script>
+    <script src="js/structure/util.js"></script>
+    <script src="js/structure/canvas.js"></script>
+    <script src="js/structure/vector.js"></script>
     
     <script src="js/01_vectorIntro.js"></script>
-    <script src="js/02_vectorAddition.js"></script>
-    <script src="js/03_vectorScaling.js"></script>
-    <script src="js/04_vectorSpaceR2.js"></script>
+    <script src="js/02_vectorNoPosition.js"></script>
+    <script src="js/03_vectorAddition.js"></script>
+    <script src="js/04_vectorScaling.js"></script>
+    <script src="js/05_vectorCoordinates.js"></script>
+    <script src="js/06_iAndj.js"></script>
+    <script src="js/07_basis.js"></script>
+    <script src="js/xx_vectorSpaceR2.js"></script>
     <script src="js/testVecCoord.js"></script>
   </head>
   <body>
@@ -27,24 +32,57 @@
       <div id="vectorIntro"></div>
       
       <p>
+        Vectors do not have a position. We can represent them anywhere, although we often do 
+        with their tail sitting in the center (the origin).
+      </p>
+      <div id="vectorNoPosition"></div>
+      
+      <p>
         Two vectors can be <b>added</b> by putting them head-to-tail.
       </p>
       <div id="vectorAddition"></div>
       
       <p>
-        A vector can be <b>scaled</b> by numbers called <b>scalars</b>.
+        A vector can be <b>scaled</b> by a number called a <b>scalar</b>. 
       </p>
       <div id="vectorScaling"></div>
       
-      <p>
-        The set of all two-dimensional vectors forms a <b>vector space</b>, which we denote 
+      <!-- <p>
+        The set of all two-dimensional vectors forms a <b>vector space</b>, which we call 
         <b>ℝ<sup>2</sup></b>.
       </p>
-      <div id="vectorSpaceR2"></div>
-      <!-- <p>
-        The set of all the ways two vectors can be combined is 
-        called their <strong>linear span</strong>.
-      </p> -->
+      <div id="vectorSpaceR2"></div> -->
+      
+      <p>
+        We can represent vectors using a pair of numbers known as their <b>coordinates</b>. 
+        The first number indicates the horizontal distance of the vector's tip, 
+        while the second number indicates its vertical distance.
+      </p>
+      <div id="vectorCoordinates"></div>
+      
+      <p>
+        Consider <b class="iVec">î</b> and <b class="jVec">ĵ</b>, 
+        two <b>unit vectors</b>, meaning they have a length of 1. <b class="iVec">î</b> points
+        to the right, <b class="jVec">ĵ</b> points upwards.
+      </p>
+      <div id="iAndj"></div>
+
+      <p> 
+        The coordinates of a vector indicate how much we need to scale  
+        <b class="iVec">î</b> and <b class="jVec">ĵ</b> in order to obtain our original 
+        vector when they are added together.
+      </p>
+      <div id="basis"></div>
+
+      <p>
+        We say that <b class="iVec">î</b> and <b class="jVec">ĵ</b> form a <b>basis</b>. 
+        This means that any vector can be expressed as a sum of scaled versions of <b class="iVec">î</b> 
+        and <b class="jVec">ĵ</b>.
+      </p>
+      <p>
+        Other vectors than <b class="iVec">î</b> and <b class="jVec">ĵ</b> can form 
+        a basis. This means that the coordinates of a vector depends on the basis we choose.
+      </p>
       <div id="test"></div>
 
     </div>

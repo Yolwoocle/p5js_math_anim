@@ -1,12 +1,14 @@
 :root {
-    --white:      #ffffff;
-    --light-gray: #b8b8b8;
-    --dark-gray:  #474747;
-    --red:        #e43b44;
-    --yellow:     #fec534;
-    --green:      #4dc769;
-    --blue:       #0095e9;
-    --purple:     #ad50b5;
+    --white:       #ffffff;
+    --light-gray:  #b8b8b8;
+    --dark-gray:   #474747;
+    --red:         #e43b44;
+    --yellow:      #fec534;
+    --light-green: #a0dab9;
+    --green:       #4dc769;
+    --blue:        #0095e9;
+    --purple:      #ad50b5;
+    --pink:        #e58aa4;
 }
 
 .material-symbols-outlined {
@@ -91,4 +93,11 @@ body {
 
 ::-webkit-scrollbar-thumb:active {
     background-color: rgba(0, 0, 0, 0.6);
+}
+
+.iVec {
+    color: var(--red)
+}
+.jVec {
+    color: var(--green)
 }

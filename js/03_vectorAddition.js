@@ -105,33 +105,34 @@ const seedAddition = (sketch) => {
         }
 
         // Vector labels
+        let font_ = normalFont
         if (isV1zero) {
             v2textOffsetY = sketch.lerp(v2textOffsetY, -1, dt*10)
             
             drawVectorlessText(sketch, 
                 0, 0, v1.v.x+v2.v.x, v1.v.y+v2.v.y, 
-                COL_PURPLE, normalFont, "0+w"
+                COL_PURPLE, font_, "0+w"
             )
             drawVectorlessText(sketch, 
                 v1.v.x, v1.v.y, v1.v.x+v2.v.x, v1.v.y+v2.v.y,
-                COL_BLUE, normalFont, "w", undefined, vec2(0,v2textOffsetY)
+                COL_BLUE, font_, "w", undefined, vec2(0,v2textOffsetY)
             )        
-            drawVectorlessText(sketch, 0, 0, v1.v.x, v1.v.y, COL_RED, normalFont, "0")    
+            drawVectorlessText(sketch, 0, 0, v1.v.x, v1.v.y, COL_RED, font_, "0")    
         } else {
             v2textOffsetY = sketch.lerp(v2textOffsetY, 1, dt*10)
 
             sketch.strokeWeight(3)
             drawVectorlessText(sketch, 
                 0, 0, v1.v.x+v2.v.x, v1.v.y+v2.v.y, 
-                COL_PURPLE, normalFont, "v+w"
+                COL_PURPLE, font_, "v+w"
             )
             drawVectorlessText(sketch, 
                 0, 0, v1.v.x, v1.v.y, 
-                COL_RED, normalFont, "v"
+                COL_RED, font_, "v"
             )
             drawVectorlessText(sketch, 
                 v1.v.x, v1.v.y, v1.v.x+v2.v.x, v1.v.y+v2.v.y, 
-                COL_BLUE, normalFont, "w", undefined, vec2(0,v2textOffsetY)
+                COL_BLUE, font_, "w", undefined, vec2(0,v2textOffsetY)
             )
         }
     }

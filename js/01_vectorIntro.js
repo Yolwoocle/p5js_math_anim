@@ -1,6 +1,3 @@
-const canvasWidth =  420
-const canvasHeigth = 420
-
 const seedVectorIntro = (sketch) => {
     const size_ = 50;
 
@@ -48,22 +45,7 @@ const seedVectorIntro = (sketch) => {
         let dt = sketch.deltaTime/1000
         let fps = 1/dt
 
-        let targetX = sketch.mouseX - sketch.screenOx
-        let targetY = sketch.mouseY - sketch.screenOy
-        let d = distance(targetX, targetY)
-        let isZero = false;
-        // Clamp vector magnitude
-        if (maxVectorLen <= d) {
-            let ajustement = maxVectorLen / d
-            targetX = targetX * ajustement 
-            targetY = targetY * ajustement
-        } else if (d <= zeroThreshold) {
-            targetX = targetX*0.2;
-            targetY = targetY*0.2;
-            isZero = true;
-        }
-        vector.x = sketch.lerp(vector.x, targetX, clamp(dt*10, 0, 1))
-        vector.y = sketch.lerp(vector.y, targetY, clamp(dt*10, 0, 1))
+        let isZero = followMouse(sketch, vector, maxVectorLen, 10, zeroThreshold)
 
         let norm = vecNorm(vector)
         let normRounded = Math.round(norm, 1)
@@ -74,20 +56,10 @@ const seedVectorIntro = (sketch) => {
         sketch.translate(sketch.screenOx, sketch.screenOy);
         
         // Draw vector
-        if (isZero) {
-            // sketch.strokeWeight(3)
-            // sketch.stroke(COL_RED)
-            // sketch.line(0, 0, vector.x, vector.y)
-            
-            sketch.noStroke()
-            sketch.fill(COL_RED)
-            sketch.circle(vector.x, vector.y, ZERO_VECT_RADIUS)
-            drawVectorlessText(sketch, 0, 0, vector.x, vector.y, COL_RED, normalFont, "0")
-        } else {
-            sketch.strokeWeight(3)
-            drawVectorText(sketch, 0, 0, vector.x, vector.y, COL_RED, normalFont, normRounded)
-        }
-
+        // let font_ = isZero ? boldFont : normalFont
+        let font_ = normalFont
+        drawVectorOrZero(sketch, vector, isZero, COL_RED, vec2(0,0), font_, normRounded, "0")
+        
         // Modify HTML
         let magField = document.getElementById("magnitudeFieldValue");
         let dirArrow = document.getElementById("directionFieldArrow");

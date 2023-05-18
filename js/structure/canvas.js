@@ -7,6 +7,7 @@ function setupClickToPlay(sketch, drawFunc) {
     sketch.c2p_circleSize = 50
     sketch.c2p_circleSizeClickZone = 20
     sketch.c2p_circleSizeClickOverflow = 10
+    sketch.c2p_circleScale = 1
 
     sketch.c2p_triSize = 10
     sketch.c2p_strokeWeight = 3
@@ -18,16 +19,24 @@ function setupClickToPlay(sketch, drawFunc) {
 
     let draw = () => {
         sketch.background(255)
-        sketch.translate(canvasWidth/2, canvasHeigth/2);
+        sketch.translate(sketch.canvasWidth/2, sketch.canvasHeigth/2);
 
         let dist = distance(sketch.mouseX - sketch.screenOx, sketch.mouseY - sketch.screenOy)
         let minDist = sketch.c2p_circleSize + sketch.c2p_circleSizeClickZone
-        if (sketch.mouseIsPressed && dist <= minDist) {
+        let isFocused = dist <= minDist
+        let dt_ = sketch.deltaTime/1000
+
+        if (isFocused) {
+            sketch.c2p_circleScale = sketch.lerp(sketch.c2p_circleScale, 1.2, dt_*10)
+        } else {
+            sketch.c2p_circleScale = sketch.lerp(sketch.c2p_circleScale, 1, dt_*10)
+        }
+
+        if (sketch.mouseIsPressed && isFocused) {
             sketch.c2p_hasStartedDelay = true
         }
 
         if (sketch.c2p_hasStartedDelay) {
-            let dt_ = sketch.deltaTime/1000
             sketch.c2p_animProgress = clamp(sketch.c2p_animProgress + dt_*10, 0, 1)  
             sketch.c2p_playDelay -= dt_
             if (sketch.c2p_playDelay <= 0) {
@@ -50,7 +59,7 @@ function setupClickToPlay(sketch, drawFunc) {
             sketch.noFill();
             sketch.stroke(col);
             sketch.strokeWeight(sketch.c2p_strokeWeight);
-            sketch.circle(0,0, sketch.c2p_circleSize)
+            sketch.circle(0,0, sketch.c2p_circleSize * sketch.c2p_circleScale)
             
             // triangle
             const sin2piOver3 = 0.86602540378
@@ -58,10 +67,11 @@ function setupClickToPlay(sketch, drawFunc) {
             sketch.noFill();
             sketch.strokeWeight(sketch.c2p_strokeWeight);
             sketch.strokeJoin(sketch.ROUND);
+            let l = sketch.c2p_circleScale * sketch.c2p_triSize
             sketch.triangle(
                  sketch.c2p_triSize, 0,
-                -0.5 * sketch.c2p_triSize,  sketch.c2p_triSize * sin2piOver3,
-                -0.5 * sketch.c2p_triSize, -sketch.c2p_triSize * sin2piOver3,
+                -0.5 * l,  l * sin2piOver3,
+                -0.5 * l, -l * sin2piOver3,
             )
         }
     }

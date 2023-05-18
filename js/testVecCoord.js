@@ -1,10 +1,4 @@
-
 const seedTest = (sketch) => {
-    const canvasWidth =  400
-    const canvasHeigth = 400
-
-    const size_ = 50;
-
     let basis = {
         i : vec2(1, 0),
         j : vec2(0, -1)
@@ -15,20 +9,24 @@ const seedTest = (sketch) => {
     let normalFont
     let boldFont
     let vec
-    let vectorBasisCoords
-    let screenOx
-    let screenOy
+    let vectorBasisCoord
     
     const maxVectorLen = 200;
 
     sketch.preload = () => {
+        sketch.canvasWidth =  400
+        sketch.canvasHeigth = 400
+        
+        sketch.screenOx = sketch.canvasWidth/2
+        sketch.screenOy = sketch.canvasHeigth/2
+
         normalFont = sketch.loadFont("assets/lexend-regular.ttf")
         boldFont   = sketch.loadFont("assets/lexend-bold.ttf")
         epochTime = sketch.millis()
     }
 
     sketch.setup = () => {
-        sketch.createCanvas(canvasWidth, canvasHeigth);
+        sketch.createCanvas(sketch.canvasWidth, sketch.canvasHeigth);
         
         basis.i = vec2(Math.random()*40+30, (Math.random()*30 + 30)  )
         basis.j = vec2(Math.random()*30+30,  -(Math.random()*40+30))
@@ -40,26 +38,30 @@ const seedTest = (sketch) => {
             (-basis.i.y*vec.x + basis.i.x*vec.y)/det
         )
 
-        screenOx = canvasWidth/2
-        screenOy = canvasHeigth/2
     }
 
     sketch.draw = () => {
         let dt = sketch.deltaTime/1000
         let fps = 1/dt
-        sketch.background(255)
-        sketch.translate(screenOx, screenOy);
 
+        sketch.background(255)
+        sketch.translate(sketch.screenOx, sketch.screenOy);
+
+        let isZero = followMouse(sketch, vec, maxVectorLen)
 
         sketch.strokeWeight(3)
-        sketch.stroke(sketch.color("#f6babd"))
+        sketch.stroke(COL_BLUE)
         drawVector(sketch, 0, 0, vectorBasisCoords.x * basis.i.x, vectorBasisCoords.x * basis.i.y)
-        sketch.stroke(sketch.color("#cbedc4"))
+        sketch.stroke(COL_YELLOW)
         drawVector(sketch, 0, 0, vectorBasisCoords.y * basis.j.x, vectorBasisCoords.y * basis.j.y)
 
-        /// Draw
+        // Basis
         sketch.strokeWeight(5)
-        drawBasis(sketch, basis, 1, normalFont)
+        sketch.stroke(COL_BLUE)
+        drawVectorText(sketch, 0, 0, basis.i.x, basis.i.y)
+        sketch.stroke(COL_YELLOW)
+        drawVectorText(sketch, 0, 0, basis.j.x, basis.j.y)
+
         drawVector(sketch, 0, 0, vec.x, vec.y, COL_DARKGRAY)
         
         sketch.noStroke();
