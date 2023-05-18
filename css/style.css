@@ -3,7 +3,10 @@
     --light-gray: #b8b8b8;
     --dark-gray:  #474747;
     --red:        #e43b44;
-    --green:      #63c74d;
+    --yellow:     #fec534;
+    --green:      #4dc769;
+    --blue:       #0095e9;
+    --purple:     #ad50b5;
 }
 
 .material-symbols-outlined {
@@ -17,7 +20,7 @@
 body {
     margin: 0;
     width: 100%;
-    font-family: 'Lexend';
+    font-family: 'Lexend', 'Noto Sans';
 }
 
 .page {

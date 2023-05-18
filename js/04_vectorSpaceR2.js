@@ -22,9 +22,7 @@ function generateVectors(maxRadius, number=100, col=COL_LIGHTGRAY) {
     return arr
 }
 
-const seedLinearSpan = (sketch) => {
-    const canvasHeigth = 500
-    const canvasWidth =  500
+const seedVectorSpaceR2 = (sketch) => {
     
     const size_ = 50;
     
@@ -35,26 +33,33 @@ const seedLinearSpan = (sketch) => {
 
     let vectorsRadius = 200
     const spanVectors = generateVectors(vectorsRadius, 150)
-    let epochTime
     let normalFont
     let boldFont
+    let backupFont
+
+    let textDiv
 
     sketch.preload = () => {
+        sketch.canvasWidth =  500
+        sketch.canvasHeigth = 500
+        sketch.screenOx = sketch.canvasWidth/2
+        sketch.screenOy = sketch.canvasHeigth/2
+
         normalFont = sketch.loadFont("assets/lexend-regular.ttf")
         boldFont   = sketch.loadFont("assets/lexend-bold.ttf")
-        epochTime = sketch.millis()
+        backupFont = sketch.loadFont("assets/noto-sans-regular.ttf")
+        // epochTime = sketch.millis()
     }
 
     sketch.setup = () => {
-        sketch.createCanvas(canvasWidth, canvasHeigth);
+        sketch.createCanvas(sketch.canvasWidth, sketch.canvasHeigth);
         basis.i = vec2(Math.random()+1, (Math.random())  )
         basis.j = vec2(Math.random(),  -(Math.random()+1))
+
+        // textDiv = sketch.createDiv('span(<b>î</b>, <b>ĵ</b>)');
     }
 
-    sketch.draw = () => {
-        sketch.background(255)
-        sketch.translate(canvasWidth/2, canvasHeigth/2);
-        
+    sketch.mainDraw = () => { 
         // Draw vectors 
         sketch.strokeWeight(2)
         let timeOffset = 20; 
@@ -62,7 +67,7 @@ const seedLinearSpan = (sketch) => {
         for (let i=0; i<spanVectors.length; i++) {
             let v = spanVectors[i];
 
-            let t = clamp((sketch.millis() - epochTime - i*timeOffset)/animSpeed, 0, 1);
+            let t = clamp((sketch.millis() - sketch.epochTime - i*timeOffset)/animSpeed, 0, 1);
             let lambda = easeOut(t);
             let x = v.x*lambda;
             let y = v.y*lambda;
@@ -81,34 +86,35 @@ const seedLinearSpan = (sketch) => {
         }
         
         // Draw basis
-        let t = clamp((sketch.millis() - epochTime)/animSpeed, 0, 1)
-        drawBasis(sketch, basis, size_ * easeOut(t), boldFont)
-
-        // Text: explaination
-        // fill(COL_DARKGRAY)
-        // noStroke();
-        // textFont(normalFont);
-        // textSize(20);
-        // textAlign(CENTER);
-        // text(
-        //     "The set of all the ways two vectors can be combined is called their linear span.", 
-        //     0, -280
-        // )
+        // let t = clamp((sketch.millis() - epochTime)/animSpeed, 0, 1)
+        // drawBasis(sketch, basis, size_ * easeOut(t), boldFont)
         
         // Text: basis vectors
-        let lambda = clamp((sketch.millis() - epochTime - 4000)/animSpeed, 0, 1)
+        let lambda = clamp((sketch.millis() - sketch.epochTime - 4000)/animSpeed, 0, 1)
         let c1 = sketch.color(0,0,0,0)
         let c2 = sketch.color(COL_DARKGRAY)
         let col = sketch.lerpColor(c1, c2, lambda)
-        let distScale = 0.707106781 * 0.9 // sqrt(2)/2 * some ajustment term; 
+        let distScale = 0.707106781 // sqrt(2)/2 * some ajustment term; 
         sketch.textAlign(sketch.LEFT);
         sketch.fill(col)
+        sketch.textSize(40);
         sketch.stroke(COL_WHITE)
+        // "span(î, ĵ)", 
+        sketch.textFont(backupFont);
         sketch.text(
-            "span(î, ĵ)", 
-            vectorsRadius*distScale, vectorsRadius*distScale + easeOut(lambda)*30
+            "ℝ", 
+            vectorsRadius*distScale + 10, vectorsRadius*distScale + easeOut(lambda)*30
         )
+        sketch.textFont(normalFont);
+        sketch.text(
+            "²", 
+            vectorsRadius*distScale + 35, vectorsRadius*distScale + easeOut(lambda)*30
+        )
+        // textDiv.style('color', col.toString());
+        // textDiv.position(vectorsRadius*distScale, vectorsRadius*distScale + easeOut(lambda)*30);
     }
+
+    sketch.draw = setupClickToPlay(sketch, sketch.mainDraw)
 };
 
-let p5linearSpan = new p5(seedLinearSpan, "linearSpan");
+let p5vectorSpaceR2 = new p5(seedVectorSpaceR2, "vectorSpaceR2");

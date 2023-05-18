@@ -8,9 +8,12 @@
     <!-- <script src="./lib/p5.fillGradient.js"></script> -->
     
     <script src="js/p5js/util.js"></script>
+    <script src="js/p5js/canvas.js"></script>
     
-    <script src="js/vectorIntro.js"></script>
-    <script src="js/linearSpan.js"></script>
+    <script src="js/01_vectorIntro.js"></script>
+    <script src="js/02_vectorAddition.js"></script>
+    <script src="js/03_vectorScaling.js"></script>
+    <script src="js/04_vectorSpaceR2.js"></script>
     <script src="js/testVecCoord.js"></script>
   </head>
   <body>
@@ -18,15 +21,30 @@
       <h1>Linear Algebra</h1>
 
       <p>
-        A <strong>vector</strong> is geometric object that has a magnitude 
+        A <strong>vector</strong> is a geometric object that has a magnitude 
         <span id="magnitudeField"></span> and a direction<span id="directionField"></span>.
       </p>
       <div id="vectorIntro"></div>
+      
       <p>
+        Two vectors can be <b>added</b> by putting them head-to-tail.
+      </p>
+      <div id="vectorAddition"></div>
+      
+      <p>
+        A vector can be <b>scaled</b> by numbers called <b>scalars</b>.
+      </p>
+      <div id="vectorScaling"></div>
+      
+      <p>
+        The set of all two-dimensional vectors forms a <b>vector space</b>, which we denote 
+        <b>ℝ<sup>2</sup></b>.
+      </p>
+      <div id="vectorSpaceR2"></div>
+      <!-- <p>
         The set of all the ways two vectors can be combined is 
         called their <strong>linear span</strong>.
-      </p>
-      <div id="linearSpan"></div>
+      </p> -->
       <div id="test"></div>
 
     </div>

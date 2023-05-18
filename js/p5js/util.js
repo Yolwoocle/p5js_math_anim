@@ -1,8 +1,13 @@
-let COL_WHITE =     "#ffffff"
-let COL_LIGHTGRAY = "#b8b8b8"
-let COL_DARKGRAY =  "#474747"
-let COL_RED =       "#e43b44"
-let COL_GREEN =     "#63c74d"
+const COL_WHITE =     "#ffffff"
+const COL_LIGHTGRAY = "#b8b8b8"
+const COL_DARKGRAY =  "#474747"
+const COL_RED =       "#e43b44"
+const COL_YELLOW =    "#fec534"
+const COL_GREEN =     "#4dc769"
+const COL_BLUE =      "#0095e9"
+const COL_PURPLE =    "#ad50b5"
+
+const ZERO_VECT_RADIUS = 12
 
 function vec2(x, y) {
     return {
@@ -51,17 +56,17 @@ function drawVector(sketch, x1, y1, x2, y2, col) {
     );
 }
 
-function drawVectorlessText(sketch, x1, y1, x2, y2, col, font_, txt="", textSize_=25) {
-    let dx = x2 - x1
-    let dy = y2 - y1
+function drawVectorlessText(sketch, x1, y1, x2, y2, col, font_, txt="", textSize_=25, textOffset=vec2(0,1)) {
+    let dx = (x2 - x1)
+    let dy = (y2 - y1)
     let norm = Math.sqrt(dx*dx + dy*dy)
-    let tx = dx/2 - textSize_*dy/norm;
-    let ty = dy/2 + textSize_*dx/norm;
+    let tx = (x1 + dx/2 + textOffset.x) - (textOffset.y * 0.7 * textSize_ * dy)/norm;
+    let ty = (y1 + dy/2 + textOffset.x) + (textOffset.y * 0.7 * textSize_ * dx)/norm;
     
     if (txt !== undefined) {
         sketch.textFont(font_);
         sketch.textSize(textSize_);
-        sketch.textAlign(sketch.CENTER);
+        sketch.textAlign(sketch.CENTER, sketch.CENTER);
         sketch.stroke(COL_WHITE);
         sketch.strokeWeight(4); 
         sketch.fill(col);
@@ -69,9 +74,18 @@ function drawVectorlessText(sketch, x1, y1, x2, y2, col, font_, txt="", textSize
     }
 }
 
-function drawVectorText(sketch, x1, y1, x2, y2, col, font_, txt="", textSize_=25) {
+function drawVectorText(sketch, x1, y1, x2, y2, col, font_, txt="", textSize_=25, textOffset=vec2(0,1)) {
     drawVector(sketch, x1, y1, x2, y2, col)
-    drawVectorlessText(sketch, x1, y1, x2, y2, col, font_, txt, textSize_)
+    drawVectorlessText(sketch, x1, y1, x2, y2, col, font_, txt, textSize_, textOffset)
+}
+
+function clampVector(v, maxLen) {
+    let d = distance(v.x, v.y)
+    if (maxLen <= d) {
+        let ajustement = maxLen / d
+        v.x *= ajustement 
+        v.y *= ajustement
+    }
 }
 
 function drawBasis(sketch, basis, size_, font_, textSize_ = 25) {
