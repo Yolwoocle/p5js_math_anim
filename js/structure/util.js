@@ -2,18 +2,23 @@ const COL_WHITE =       "#ffffff"
 const COL_LIGHTGRAY =   "#b8b8b8"
 const COL_DARKGRAY =    "#474747"
 const COL_RED =         "#e43b44"
+const COL_ORANGE =      "#fe8134";
 const COL_YELLOW =      "#fec534"
-const COL_LIGHTGREEN =  "#a0dab9"
 const COL_GREEN =       "#4dc769"
+const COL_CYAN =        "#4ce1f2";
 const COL_BLUE =        "#0095e9"
 const COL_PURPLE =      "#ad50b5"
+
 const COL_PINK =        "#e58aa4"
+const COL_BEIGE =       "#efd8a5";
+const COL_LIGHTGREEN =  "#a0dab9"
 
 const ZERO_VECT_RADIUS = 12
 
 const DEFAULT_VECT_TEXT_SIZE = 25
 
 function drawGrid(sketch, w, h, spacing, strokeColor=200) {
+    
     sketch.stroke(strokeColor)
     sketch.strokeWeight(2)
     for(let ix=-w; ix<=w; ix++) {

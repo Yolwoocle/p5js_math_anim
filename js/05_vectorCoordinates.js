@@ -47,7 +47,7 @@ const seedVectorCoordinates = (sketch) => {
         let dt = sketch.deltaTime/1000
         let fps = 1/dt
 
-        let isZero = followMouse(sketch, vector, maxVectorLen, 10, zeroThreshold)
+        let isZero = followMouse(sketch, vector, maxVectorLen, 10, zeroThreshold, true)
 
         let norm = vecNorm(vector)
         let normRounded = Math.round(norm, 1)
@@ -57,13 +57,16 @@ const seedVectorCoordinates = (sketch) => {
         sketch.background(255)
         sketch.translate(sketch.screenOx, sketch.screenOy);
         
-        drawGrid(sketch, 5, 5, scale)
+        // drawGrid(sketch, 5, 5, scale)
 
         // Draw vector
         // let font_ = isZero ? boldFont : normalFont
         let rx =  Math.round(10 * vector.x  / scale) / 10
         let ry = -Math.round(10 * vector.y / scale)  / 10
+        sketch.textSize(DEFAULT_VECT_TEXT_SIZE)
+        drawVectorOrZero(sketch, vector, isZero, COL_DARKGRAY, vec2(0,0))   
 
+        // Draw matrix
         let unitVec = normalizedVect(vector)
         let colArr = isZero ? [0, 0] : [rx, ry]
         drawColumnVector(sketch, unitVec.x*(norm + 40), unitVec.y*(norm + 40), colArr, normalFont, COL_DARKGRAY, [COL_RED, COL_GREEN])
@@ -81,10 +84,7 @@ const seedVectorCoordinates = (sketch) => {
         sketch.line(0, 0, vector.x, 0)
         sketch.stroke(COL_GREEN)
         sketch.line(vector.x, 0, vector.x, vector.y)
-    
-        sketch.textSize(DEFAULT_VECT_TEXT_SIZE)
-        drawVectorOrZero(sketch, vector, isZero, COL_DARKGRAY, vec2(0,0))
-        
+           
         // Coordinate numbers
         let textSize = sketch.textSize()
         sketch.stroke(COL_WHITE)

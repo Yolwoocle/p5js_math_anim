@@ -3,12 +3,16 @@
     --light-gray:  #b8b8b8;
     --dark-gray:   #474747;
     --red:         #e43b44;
+    --orange:      #fe8134;
     --yellow:      #fec534;
-    --light-green: #a0dab9;
     --green:       #4dc769;
+    --cyan:        #4ce1f2;
     --blue:        #0095e9;
     --purple:      #ad50b5;
+    
     --pink:        #e58aa4;
+    --beige:       #efd8a5;
+    --light-green: #a0dab9;
 }
 
 .material-symbols-outlined {

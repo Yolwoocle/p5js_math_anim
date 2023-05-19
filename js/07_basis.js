@@ -28,7 +28,7 @@ const seedBasis = (sketch) => {
         let dt = sketch.deltaTime/1000
         let fps = 1/dt
 
-        let isZero = followMouse(sketch, vector, maxVectorLen, 10, zeroThreshold)
+        let isZero = followMouse(sketch, vector, maxVectorLen, 10, zeroThreshold, true)
 
         let norm = vecNorm(vector)
         let normRounded = Math.round(norm, 1)
@@ -39,25 +39,28 @@ const seedBasis = (sketch) => {
         sketch.translate(sketch.screenOx, sketch.screenOy);
         
         // Grid
-        drawGrid(sketch, 5, 5, scale)
+        // drawGrid(sketch, 5, 5, scale)
 
         // Draw vector
         let rx =  Math.round(10 * vector.x  / scale) / 10
         let ry = -Math.round(10 * vector.y / scale)  / 10
 
         // Scaled axis vectors
-        sketch.strokeWeight(4)
+        sketch.strokeWeight(3)
         drawVector(sketch, 0, 0, vector.x, 0, COL_PINK)
+        sketch.strokeWeight(3)
         drawVector(sketch, vector.x, 0, vector.x, vector.y, COL_LIGHTGREEN)
         
-        // Axis vectors
-        drawVectorText(sketch, 0, 0, scale, 0, COL_RED,   normalFont, "î")
-        drawVectorText(sketch, 0, 0, 0, -scale, COL_GREEN, normalFont, "ĵ", undefined, vec2(0, -1))
-    
         // Vector
         sketch.textSize(DEFAULT_VECT_TEXT_SIZE)
         drawVectorOrZero(sketch, vector, isZero, COL_DARKGRAY, vec2(0,0))
+            
         
+        // Axis vectors
+        sketch.strokeWeight(4)
+        drawVectorText(sketch, 0, 0, scale, 0, COL_RED,   normalFont, "î")
+        sketch.strokeWeight(4)
+        drawVectorText(sketch, 0, 0, 0, -scale, COL_GREEN, normalFont, "ĵ", undefined, vec2(0, -1))
         // Coordinate numbers
         let textSize = sketch.textSize()
         sketch.stroke(COL_WHITE)

@@ -106,23 +106,42 @@ function drawBasis(sketch, basis, size_, font_, textSize_ = DEFAULT_VECT_TEXT_SI
 }
 
 
-function followMouse(sketch, vector, maxVectorLen=200, followSpeed=10, zeroThreshold=5) {
+function followMouse(sketch, vector, maxVectorLen=200, followSpeed=10, zeroThreshold=5, rectMode=false) {
     let dt_ = sketch.deltaTime/1000
+
+    let adjustPolar = (dx, dy) => {
+        let dist = distance(dx, dy);
+        if (maxVectorLen <= dist) {
+            let adjustment = maxVectorLen / dist
+            return [dx * adjustment, dy * adjustment]
+        }
+        return [dx, dy]
+    }
+    let adjustRect = (dx, dy) => {
+        return [
+            clamp(dx, -maxVectorLen, maxVectorLen),
+            clamp(dy, -maxVectorLen, maxVectorLen)
+        ]
+    }
+    let adjust = rectMode ? adjustRect : adjustPolar
 
     let targetX = sketch.mouseX - sketch.screenOx
     let targetY = sketch.mouseY - sketch.screenOy
-    let d = distance(targetX, targetY)
-    let isZero = false;
+    
     // Clamp vector magnitude
-    if (maxVectorLen <= d) {
-        let ajustement = maxVectorLen / d
-        targetX = targetX * ajustement 
-        targetY = targetY * ajustement
-    } else if (d <= zeroThreshold) {
+    let newCoords = adjust(targetX, targetY)
+    targetX = newCoords[0]
+    targetY = newCoords[1]
+    
+    let dist = distance(targetX, targetY);
+    let isZero = false;
+    if (dist <= zeroThreshold) {
         targetX = targetX*0.2;
         targetY = targetY*0.2;
         isZero = true;
     }
+
+    // Lerp to new position
     vector.x = sketch.lerp(vector.x, targetX, clamp(dt_*followSpeed, 0, 1))
     vector.y = sketch.lerp(vector.y, targetY, clamp(dt_*followSpeed, 0, 1))
 

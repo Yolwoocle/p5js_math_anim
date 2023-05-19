@@ -22,10 +22,12 @@ const seediAndj = (sketch) => {
         sketch.background(255)
         sketch.translate(sketch.screenOx, sketch.screenOy);
         
-        drawGrid(sketch, 5, 5, scale)
+        // drawGrid(sketch, 5, 5, scale)
 
         // Axis vectors
+        sketch.strokeWeight(4)
         drawVectorText(sketch, 0, 0, scale, 0, COL_RED,   normalFont, "î", undefined, vec2(0,0.6))
+        sketch.strokeWeight(4)
         drawVectorText(sketch, 0, 0, 0, -scale, COL_GREEN, normalFont, "ĵ", undefined, vec2(0,0.6))
     }
 };
