@@ -1,5 +1,13 @@
 <html>
   <head>
+    <title>Linear Algebra · Yolwoocle</title>
+    <meta content="Linear Algebra · Yolwoocle" property="og:title" />
+    <meta content="An interactive lesson about the fundamental ideas behind linear algebra" property="og:description" />
+    <meta content="https://yolwoocle.github.io/linear_algebra/3dtest.html" property="og:url" />
+    <meta content="./images/linear_algebra_thumbnail.png" property="og:image" />
+    <meta content="#4AA075" data-react-helmet="true" name="theme-color" />
+    <meta name="twitter:card" content="summary_large_image">
+
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
     <link rel="stylesheet" href="css/fonts.css">
     <link rel="stylesheet" href="css/style.css">
@@ -20,13 +28,14 @@
     <script src="js/06_iAndj.js"></script>
     <script src="js/07_basis.js"></script>
     <script src="js/08_otherBasis.js"></script>
-    <script src="js/09_3dtest.js"></script>
-    <script src="js/xx_vectorSpaceR2.js"></script>
+    <!-- <script src="js/09_3dtest.js"></script> -->
+    <script src="js/09_span.js"></script>
+    <!-- <script src="js/xx_vectorSpaceR2.js"></script> -->
   </head>
   <body>
     <div class="page">
       <h1>Linear Algebra</h1>
-
+      
       <p>
         A <strong>vector</strong> is a geometric object that has a magnitude 
         <span id="magnitudeField"></span> and a direction<span id="directionField"></span>.
@@ -86,6 +95,22 @@
         a basis. The coordinates of a vector <b>depends on the basis</b> we choose.
       </p>
       <div id="otherBasis"></div>
+
+      <p>
+        We can think about trying out all possible combinations of the basis vectors and 
+        putting them together to create a set (a collection of objects). This set is 
+        called the <b>span</b> of the basis.
+      </p>
+      <div id="span"></div>
+
+      <hr>
+      <footer>
+        <p>
+          An interactive lesson by 
+          <a href="https://yolwoocle.github.io/index.html">Léo Bernard</a> · 
+          <a href="https://github.com/Yolwoocle/p5js_math_anim">Source code</a>
+        </p>
+      </footer>
 
     </div>
   </body>

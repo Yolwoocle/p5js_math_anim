@@ -148,21 +148,21 @@ function followMouse(sketch, vector, maxVectorLen=200, followSpeed=10, zeroThres
     return isZero
 }
 
-function generateVectorsCircle(maxRadius, number=100) {
+function generateVectorsCircle(maxRadius, n=100) {
     // Sunflower distribution https://stackoverflow.com/questions/28567166/uniformly-distribute-x-points-inside-a-circle
     let arr = [];
     const phi = 1.61803398875;
     const angle_stride = (2 * Math.PI) / (phi*phi)
-    let radius = (k, n) => {
+    let radius = (k) => {
         if(k > n) { 
             return 1.0 
         } else {
-            return Math.sqrt(k - 0.5) / Math.sqrt(n - 0.5)
+            return Math.sqrt(k + 0.5) / Math.sqrt(n - 0.5)
         }
     }
     
-    for (let i=0; i<number; i++) {
-        let r = radius(i, number) * maxRadius
+    for (let i=0; i<n; i++) {
+        let r = radius(i) * maxRadius
         let theta = i * angle_stride
         let x = r * Math.cos(theta);
         let y = r * Math.sin(theta);

@@ -13,6 +13,8 @@
     --pink:        #e58aa4;
     --beige:       #efd8a5;
     --light-green: #a0dab9;
+
+    --dark-green:  #4aa075;
 }
 
 .material-symbols-outlined {
@@ -26,11 +28,19 @@
 body {
     margin: 0;
     width: 100%;
+    background-color: var(--white);
     font-family: 'Lexend', 'Noto Sans';
+}
+
+a {
+    color: var(--dark-green);
+    text-decoration: none;
+    /* font-weight: bold; */
 }
 
 .page {
     width: 100%;
+    background-color: var(--white);
 
     max-width: 800px;
     align-items: center;

@@ -7,7 +7,7 @@ const seedVectorSpaceR2 = (sketch) => {
         j : vec2(0, -1)
     }
 
-    let vectorsRadius = 200
+    let vectorsRadius = 200*0.7
     let spanVectors
     let normalFont
     let boldFont
@@ -25,14 +25,14 @@ const seedVectorSpaceR2 = (sketch) => {
         boldFont   = sketch.loadFont("assets/lexend-bold.ttf")
         backupFont = sketch.loadFont("assets/noto-sans-regular.ttf")
         // epochTime = sketch.millis()
-    }
+    }   
 
     sketch.setup = () => {
         sketch.createCanvas(sketch.canvasWidth, sketch.canvasHeigth);
         basis.i = vec2(Math.random()+1, (Math.random())  )
         basis.j = vec2(Math.random(),  -(Math.random()+1))
 
-        spanVectors = generateVectorsCircle(vectorsRadius, 100)
+        spanVectors = generateVectorsCircle(vectorsRadius, 50)
         // textDiv = sketch.createDiv('span(<b>î</b>, <b>ĵ</b>)');
     }
 
